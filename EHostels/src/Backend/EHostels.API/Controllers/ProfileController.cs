@@ -1,14 +1,12 @@
-﻿using Application.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using EHostels.Application.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace EHostels.Api.Controllers
+namespace EHostels.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProfileController : ControllerBase
     {
         [HttpGet]

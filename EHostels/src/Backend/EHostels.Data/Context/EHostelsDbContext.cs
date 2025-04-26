@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using EHostels.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EHostels.Api;
+namespace EHostels.Data.Context;
 
 public partial class EHostelsDbContext : DbContext
 {

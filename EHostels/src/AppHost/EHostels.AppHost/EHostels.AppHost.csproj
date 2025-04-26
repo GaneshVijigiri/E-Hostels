@@ -4,20 +4,20 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UserSecretsId>bad78edd-e8f7-4e9b-9bb8-8c954fd611fe</UserSecretsId>
+    <UserSecretsId>aabd0c96-512a-49ff-98a1-32423555e679</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.2.0" />
-    <PackageReference Include="Aspire.Hosting.NodeJs" Version="9.2.0" />
+    <PackageReference Include="Aspire.Hosting.NodeJs" Version="9.2.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Backend\EHostels.API\EHostels.Api.csproj" />
-    <ProjectReference Include="..\..\Frontend\EHostels.Bff\EHostels.Bff.csproj" />
+    <ProjectReference Include="..\..\Backend\EHostels.API\EHostels.API.csproj" />
+    <ProjectReference Include="..\..\Frontend\EHostels.BFF\EHostels.BFF.csproj" />
   </ItemGroup>
 
 </Project>

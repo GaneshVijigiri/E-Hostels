@@ -1,4 +1,4 @@
-namespace API
+namespace EHostels.API
 {
     public class WeatherForecast
     {

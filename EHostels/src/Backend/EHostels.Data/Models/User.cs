@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EHostels.Api;
+namespace EHostels.Data.Models;
 
 public partial class User
 {
@@ -13,7 +13,7 @@ public partial class User
 
     public string? Password { get; set; }
 
-    public bool? IsActive { get; set; }
-
     public long? RoleId { get; set; }
+
+    public bool? IsActive { get; set; }
 }

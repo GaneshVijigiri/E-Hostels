@@ -1,4 +1,4 @@
-namespace EHostels.Bff
+namespace EHostels.BFF
 {
     public class Program
     {

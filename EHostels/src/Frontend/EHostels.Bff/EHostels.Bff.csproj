@@ -1,19 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Yarp.ReverseProxy" Version="2.3.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(Configuration)'=='Release'">
-	  <ProjectReference Include="..\EHostels.UI\EHostels.ui.esproj" >
-		  <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-	  </ProjectReference>
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+	<ItemGroup Condition="'$(Configuration)'=='Release'">
+		<ProjectReference Include="..\EHostles.UI\ehostels.ui.esproj">
+			<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		</ProjectReference>
+	</ItemGroup>
 
 </Project>

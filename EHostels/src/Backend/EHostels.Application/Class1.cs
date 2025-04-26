@@ -1,4 +1,4 @@
-﻿namespace EHostels.Common
+﻿namespace EHostels.Application
 {
     public class Class1
     {

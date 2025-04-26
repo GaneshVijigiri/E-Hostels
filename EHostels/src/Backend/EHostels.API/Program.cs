@@ -1,12 +1,14 @@
 
-using Application.Models;
-using EHostels.Api;
+using EHostels.Application.Models;
+using EHostels.Data.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Scalar.AspNetCore;
 using System.Text;
 
-namespace API
+namespace EHostels.API
 {
     public class Program
     {
@@ -49,6 +51,7 @@ namespace API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddOpenApi();
 
             var app = builder.Build();
 
@@ -56,6 +59,8 @@ namespace API
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.MapOpenApi();
+                app.MapScalarApiReference();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }

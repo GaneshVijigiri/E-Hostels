@@ -1,4 +1,5 @@
-﻿using Application.Models;
+﻿using EHostels.Application.Models;
+using EHostels.Data.Context;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,21 +8,21 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace EHostels.Api.Controllers
+namespace EHostels.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class IdentityController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly EHostelsDbContext _context;
-        public LoginController(IConfiguration configuration, EHostelsDbContext context)
+        public IdentityController(IConfiguration configuration, EHostelsDbContext context)
         {
             _configuration = configuration;
             _context = context;
         }
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody]LoginUser user)
+        public async Task<IActionResult> Login([FromBody] LoginUser user)
         {
             var existUser = await _context.Users.FirstOrDefaultAsync(x => x.Email == user.Email && x.Password == user.Password);
             if (existUser != null)
