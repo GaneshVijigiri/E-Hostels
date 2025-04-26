@@ -1,4 +1,11 @@
 
+using Application.Models;
+using EHostels.Api;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 namespace API
 {
     public class Program
@@ -7,7 +14,36 @@ namespace API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<EHostelsDbContext>(options =>
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+            builder.Services.AddScoped<EHostelsDbContext>();
             // Add services to the container.
+            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+            var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
+            var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x => {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = false;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8
+                        .GetBytes(jwtSettings.Secret)
+                    ),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                };
+            }); ;
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -19,10 +55,12 @@ namespace API
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
